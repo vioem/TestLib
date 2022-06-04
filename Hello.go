@@ -2,26 +2,51 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
 )
 
 func main() {
-	var cnt1 = 0
-	var cnt2 = 0
+	var room = "озеро"
 
-	var arr [200]int
-
-	for i := range arr {
-		arr[i] = rand.Intn(1000)
-
+	switch room { // Выражения для каждого случая
+	case "пещера":
+		fmt.Println("Вы находитесь в тускло освещенной пещере.")
+	case "озеро":
+		fmt.Println("Лед кажется достаточно крепким.")
+		fallthrough // Переходит на следующий случай
+	case "глубина":
+		fmt.Println("Вода такая холодная, что сводит кости.")
 	}
 
-	for i := range arr {
-		if arr[i]%2 == 0 {
-			cnt1++
-		} else {
-			cnt2++
-		}
+	var i interface{}
+	i = room
+	switch i := i.(type) {
+	case string:
+		fmt.Printf("string: %s", i)
+	case int:
+		fmt.Printf("sdfsdf")
+	default:
+		fmt.Printf("something else: %T:%v", i, i)
 	}
-	fmt.Println(cnt1, cnt2)
 }
+
+/*
+   CMP A, B
+   JMP -> 5
+   CMP V, B
+   JMP -> 7
+   CMP W, B
+   JMP -> 9
+   ...
+5:   MOV
+6:   CALL
+7:   MOV
+8:   CALL
+9:   MOV
+     JMP -> END
+A:   CALL
+B:   MOV
+C:   CALL
+END: sdfsdf
+
+
+*/
