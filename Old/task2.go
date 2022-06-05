@@ -5,9 +5,7 @@
 package main
 
 // Importing fmt
-import (
-	"fmt"
-)
+import "fmt"
 
 // Calling main
 func main() {
