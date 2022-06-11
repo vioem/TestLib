@@ -41,7 +41,9 @@ func main() {
 	fmt.Printf("Минимальное значение %d. Максимальное значение %d\n", ext(arr2)[0], ext(arr2)[1])
 
 	// сортировка значений массива по возрастанию
-	fmt.Println("Отсортированные массивы", BubbleSort(arr1), BubbleSort(arr2))
+	BubbleSort(arr1)
+	BubbleSort(arr2)
+	fmt.Println("Отсортированные массивы", arr1, arr2)
 
 	// поиск пересечений двух массивов
 	fmt.Println("В двух массивах есть следующие элементы: ", Intersection(arr1, arr2))
@@ -101,15 +103,14 @@ func ext(value []int) []int {
 	return []int{min, max}
 }
 
-func BubbleSort(value []int) []int {
-	for i := 0; i < len(value); i++ {
-		for j := i + 1; j < len(value); j++ {
+func BubbleSort(value []int) {
+	for i := 0; i < len(value); i++ { // n iterations
+		for j := i + 1; j < len(value); j++ { // (n-1)/2
 			if value[i] > value[j] {
 				value[i], value[j] = value[j], value[i]
 			}
 		}
 	}
-	return value
 }
 
 func Intersection(val1, val2 []int) []int {
@@ -125,8 +126,53 @@ func Intersection(val1, val2 []int) []int {
 	return val3
 }
 
+func IntersectionDedup(s0, s1 []int) []int {
+	// s0 := []int{1, 2, 2, 3}
+	// s1 := []int{2, 3, 3, 4}
+	// map[key]value
+
+	s0Map := map[int]struct{}{}
+	// int -> {}
+	for _, item := range s0 {
+		s0Map[item] = struct{}{}
+		// s0Map[3] -> {}
+		//
+		// idx := hash(key)
+		// map.Slice[idx] = {exists: true, key: key, value: {}}
+		//
+		// s0Map.Slice[hash(1)] = {exists: true, key: 1, value: {}} 
+		// s0Map.Slice[hash(2)] = {exists: true, key: 2, value: {}}
+		// s0Map.Slice[hash(2)] = {exists: true, key: 2, value: {}}
+		// s0Map.Slice[hash(3)] = {exists: true, key: 3, value: {}}
+	}
+
+	result := make(map[int]struct{})
+	for _, item := range s1 {
+		// ok <- exists
+		if _, ok := s0Map[item]; ok {
+			result[item] = struct{}{}
+			// map.Slice[hash(5)] = {exists: true, key: 5, value: {}}
+			// map.Slice[hash(5)] = {exists: true, key: 5, value: {}}
+		}
+	}
+
+	// convert map "result" to slice "deduped"
+	var deduped []int
+	for item := range result {
+		deduped = append(deduped, item)
+	}
+
+	return deduped
+}
+
+// Plus kjlkfsdf
+//
+// Lengths of val1 and val2 should be equal, otherwise it will panic.
 func Plus(val1, val2 []int) []int {
-	val3 := make([]int, len(val1), len(val1))
+	if len(val1) != len(val2) {
+		panic(fmt.Sprintf("slice lengths are not equal: %d != %d", len(val1), len(val2)))
+	}
+	val3 := make([]int, len(val1))
 	for i := 0; i < len(val1); i++ {
 		val3[i] = val1[i] + val2[i]
 	}
