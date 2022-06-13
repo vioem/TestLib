@@ -14,7 +14,7 @@ func main() {
 	for i:=0; i<len(arr); i++ {
 		arr[i]=rand.Intn(len(arr))
 	}
-	for i, _ :=range arr { // Note for xai - зная значение в массиве, можно ли сразу выдернуть индекс? Знаю, что этот код можно упростить, но не знаю как
+	for i, _ :=range arr {
 		if i==0 || arr[i] < min {
 			min=arr[i]
 		}
