@@ -8,7 +8,6 @@ import (
 	"math/rand"
 	"time"
 )
-var sum, z int
 
 func main() {
 
@@ -17,18 +16,23 @@ func main() {
 	for i := 0; i < 10; i++ {
 		arr[i]=rand.Intn(10)
 	}
+	
+	var sum int
 	m := map[int]int{}
 
 	for _, x := range arr {
 		for z:=0; z < len(arr); z++ {
 			if x == arr[z] {
 				sum++
-				z++
 			}
 		}
 		m[x] = sum
 		sum = 0
 	}
-fmt.Println(arr)
-fmt.Println(m)
+	
+	/* fmt.Println(arr)
+	fmt.Println(m) */
+	for i,j := range m {
+		fmt.Printf("Число %d повторяется %d раз(а)\n", i, j)
+	}
 }
