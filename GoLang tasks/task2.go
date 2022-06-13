@@ -8,25 +8,27 @@ import (
 	"math/rand"
 	"time"
 )
+var sum, z int
 
 func main() {
-	sum := 0
-	z := 0
+
+	arr := [10]int{}
 	rand.Seed(time.Now().UnixNano())
-	//array := rand.Perm(20)
-	array := [7]int{1, 1, 1, 2, 4, 4, 3}
-	for _, x := range array {
-		for z < len(array) {
-			if x == array[z] {
+	for i := 0; i < 10; i++ {
+		arr[i]=rand.Intn(10)
+	}
+	m := map[int]int{}
+
+	for _, x := range arr {
+		for z:=0; z < len(arr); z++ {
+			if x == arr[z] {
 				sum++
-				z++
-			} else {
 				z++
 			}
 		}
-		fmt.Printf("Количество %d повторяется %d разa\n", x, sum)
+		m[x] = sum
 		sum = 0
-		z = 0
 	}
-
+fmt.Println(arr)
+fmt.Println(m)
 }
