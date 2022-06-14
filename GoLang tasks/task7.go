@@ -8,20 +8,20 @@ import (
 )
 
 func main() {
-    planets := []string{
-        "Меркурий", "Венера", "Земля", "Марс",
-        "Юпитер", "Сатурн", "Уран", "Нептун",
-    }
+    planets := []string{ "Меркурий", "Венера", "Земля", "Марс", "Юпитер", "Сатурн", "Уран", "Нептун"}
+    fmt.Println(terr("Новый", planets...))
+}
 
-	for i, _ := range planets {
-		if strings.Contains(planets[i], "Марс") {
-			planets[i]=^"Новый "
-		} else if planets[i]=="Уран" {
-			planets[i]="Новый "+"Уран"
-		} else if planets[i]=="Нептун" {
-			planets[i]="Новый "+"Нептун"
+func terr(prefix string, worlds ...string) []string {
+    newWorlds := make([]string, len(worlds))
+
+    for i := range worlds {
+        if strings.Contains(worlds[i], "Марс") || strings.Contains(worlds[i], "Нептун") || strings.Contains(worlds[i], "Уран") {
+			newWorlds[i] = prefix + " " + worlds[i]
+		} else {
+			newWorlds[i] = worlds[i]
 		}
-	} 
-    fmt.Println(planets)
+    }
+    return newWorlds
 }
 
