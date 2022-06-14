@@ -1,19 +1,21 @@
 
 package main
 
-import "fmt"
-
-func terraform(prefix string, worlds ...string) []string {
-    newWorlds := make([]string, len(worlds)) // Создает новый срез вместо прямого изменения worlds
-
-    for i := range worlds {
-        newWorlds[i] = prefix + " " + worlds[i]
-    }
-    return newWorlds
-}
+import (
+    "fmt"
+)
 
 func main() {
-	planets := []string{"Венера", "Марс", "Юпитер"}
-	newPlanets := terraform("Нью", planets...)
-	fmt.Println(newPlanets) // Выводит: [Нью Венера Нью Марс Нью Юпитер]	
+    var temperatures = []float64{
+        -28.0, 32.0, -31.0, -29.0, -23.0, -29.0, -28.0, -33.0,
+    }
+    set := make(map[float64]bool) // Создание карты с булевыми значениями
+    for _, t := range temperatures {
+        set[t] = true
+    }
+    if set[-28.0] {
+        fmt.Println("часть множества") // Выводит: часть множества
+    }
+    fmt.Println(set) // Выводит: Prints map[-31:true -29:true -23:true -33:true -28:true 32:true]
+     
 }
