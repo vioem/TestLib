@@ -3,23 +3,31 @@
 //Выяснить пройдет ли коробка через дверь?
 package main
 
-import (
-	"fmt"
-)
+import	"fmt"
 
 func main() {
-	var A, B, C, x, y int
-	var aa, bb, cc bool
-	fmt.Println("Введите параметры коробки:")
-	fmt.Scanf("%d %d %d\n", &A, &B, &C)
-	fmt.Println("Введите параметры дверного проёма:")
-	fmt.Scanf("%d %d\n", &x, &y)
-	aa = A <= x || A <= y
-	bb = B <= x || B <= y
-	cc = C <= x || C <= y
-	if aa && bb && cc {
-		fmt.Println("Пройдет")
+	var a,b,c,d,f int
+	fmt.Println("Enter box a*b*c sizes:")
+	fmt.Scanf("%d %d %d\n", &a, &b, &c)
+	fmt.Println("Eter door x*y size:")
+	fmt.Scanf("%d %d\n", &d, &f)
+	arr :=[]int{a,b,c}
+	enter(arr,d,f)
+}
+ 
+func enter(val []int, x,y int) {
+	smap := make(map[int][]int) 
+	for _, j :=range  val{
+		if j <=x {	
+			smap[x] = append(smap[x], j)
+		} else if j <= y {
+			smap[y] = append(smap[y], j)
+		}
+	}
+	if smap[x] != nil && smap[y] != nil {
+		fmt.Println("Pass")
 	} else {
-		fmt.Println("не пройдет")
+		fmt.Println("Not pass")
+
 	}
 }
